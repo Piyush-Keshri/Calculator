@@ -52,17 +52,18 @@ function useOperator(operator) {
 
     // Prevent Multiple Operators
 
-    if(operatorValue && awaitingNextValue)
-    return;
-
+    if(operatorValue && awaitingNextValue){
+        operatorValue = operator;
+        return;
+    }
     // Assign firstValue if no value
     if (!firstValue) {
         firstValue = currentValue;
     }
     else {
-        console.log(firstValue,operatorValue,currentValue);
         const calculation = calculate[operatorValue](firstValue,currentValue);
-        console.log('calculation:',calculation);
+        calculatorDisplay.textContent = calculation;
+        firstValue = calculation;
     }
 
     // Ready for next Value, store operator
